@@ -4,16 +4,18 @@ import game.entity.Player;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 
 public class GamePanel extends JPanel implements Runnable{
 
+    final private int TILE_SIZE = 16;
+    final private int SCALE = 3;
+
     //SCREEN SETTINGS
-    final private int TILE_SIZE = 64;  //48px x 48px tile
-    final private int MAX_SCREEN_COLUMNS = 16;
+    final private int TILE_SIZE_AFTER_SCALE = TILE_SIZE * SCALE;  //48px x 48px tile
+    final private int MAX_SCREEN_COLUMNS = 20;
     final private int MAX_SCREEN_ROWS = 12;
-    final private int SCREEN_WIDTH = TILE_SIZE * MAX_SCREEN_COLUMNS;
-    final private int SCREEN_HEIGHT = TILE_SIZE * MAX_SCREEN_ROWS;
+    final private int SCREEN_WIDTH = TILE_SIZE_AFTER_SCALE * MAX_SCREEN_COLUMNS;
+    final private int SCREEN_HEIGHT = TILE_SIZE_AFTER_SCALE * MAX_SCREEN_ROWS;
     final private int FPS = 60;
 
     final private KeyHandler KEY_HANDLER = new KeyHandler();
@@ -87,7 +89,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
 
     public int getTileSize(){
-        return TILE_SIZE;
+        return TILE_SIZE_AFTER_SCALE;
     }
 }
 
