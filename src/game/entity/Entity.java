@@ -1,6 +1,8 @@
 package game.entity;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Entity {
 
@@ -9,11 +11,21 @@ public class Entity {
     protected int speed;
 
     protected BufferedImage standFront, standBack, standLeft, standRight;
-    protected BufferedImage walkDown1, walkDown2, walkUp1, walkUp2, walkLeft1, walkLeft2, walkLeft3, walkLeft4, walkRight1, walkRight2;
+    protected List<BufferedImage> walkDown;
+    protected List<BufferedImage> waldUp;
+    protected List<BufferedImage> walkLeft;
+    protected List<BufferedImage> walkRight;
+
     protected String direction;
 
-    protected boolean isSideWalking = false;
-
     protected int spriteCounter = 0;
-    protected int moveSprite = 1;
+    protected int moveSprite = 0;
+
+    protected void initializeWalkAnimationList(){
+
+        walkDown = new ArrayList<>();
+        waldUp = new ArrayList<>();
+        walkLeft = new ArrayList<>();
+        walkRight = new ArrayList<>();
+    }
 }

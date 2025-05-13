@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 
 public class Player extends Entity{
@@ -26,24 +27,42 @@ public class Player extends Entity{
 
         x = 100;
         y = 100;
-        speed = 4;
+        speed = 3;
         direction = "down";
     }
     private void getPlayerImage(){
 
+        initializeWalkAnimationList();
+
         try{
-            standFront = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerStandFront.png")));
-            walkDown1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerWalkDown1.png")));
-            walkDown2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerWalkDown2.png")));
-            standBack = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerStandBack.png")));
-            walkUp1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerWalkUp1.png")));
-            walkUp2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerWalkUp2.png")));
-            standLeft = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerStandLeft.png")));
-            walkLeft1 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerWalkLeft1.png")));
-            walkLeft2 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerWalkLeft2.png")));
-            walkLeft3 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerWalkLeft3.png")));
-            walkLeft4 = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerWalkLeft4.png")));
-            standRight = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/playerStandRight.png")));
+            //down
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front1.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front2.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front3.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front4.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front5.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front6.png"))));
+            //up
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back1.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back2.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back3.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back4.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back5.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back6.png"))));
+            //left
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left1.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left2.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left3.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left4.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left5.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left6.png"))));
+            //right
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right1.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right2.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right3.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right4.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right5.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right6.png"))));
 
         }catch(IOException e){
             //e.printStackTrace();
@@ -65,13 +84,8 @@ public class Player extends Entity{
                 playerMoveDiagonally();
             }
             spriteCounter++;
-            if(spriteCounter > 11){
-                if(!isSideWalking){
-                    verticalMove();
-                }
-                else if(isSideWalking){
-                    horizontalMove();
-                }
+            if(spriteCounter > 8){
+                animationSpriteSetter();
                 spriteCounter = 0;
             }
         }
@@ -81,22 +95,18 @@ public class Player extends Entity{
         if(keyHandler.isUpPressed()){
             direction = "up";
             y -= speed;
-            isSideWalking = false;
         }
         if(keyHandler.isDownPressed()){
             direction = "down";
             y += speed;
-            isSideWalking = false;
         }
         if(keyHandler.isLeftPressed()){
             direction = "left";
             x -= speed;
-            isSideWalking = true;
         }
         if(keyHandler.isRightPressed()){
             direction = "right";
             x += speed;
-            isSideWalking = true;
         }
     }
     private void playerMoveDiagonally(){
@@ -124,21 +134,15 @@ public class Player extends Entity{
             x += diagonalSpeed;
         }
     }
-    private void verticalMove(){
-        if(moveSprite == 1){
-            moveSprite = 2;
-        }
-        else if(moveSprite == 2){
-            moveSprite = 1;
-        }
-    }
-    private void horizontalMove(){
+    private void animationSpriteSetter(){
+
         switch (moveSprite){
+            case 0 -> moveSprite = 1;
             case 1 -> moveSprite = 2;
             case 2 -> moveSprite = 3;
             case 3 -> moveSprite = 4;
             case 4 -> moveSprite = 5;
-            case 5 -> moveSprite = 1;
+            case 5 -> moveSprite = 0;
         }
     }
     //DRAW
@@ -147,10 +151,10 @@ public class Player extends Entity{
         BufferedImage image = null;
 
         switch (direction){
-            case "up" -> image = walkAnimationSetter(image, standBack, walkUp1, walkUp2);
-            case "down" -> image = walkAnimationSetter(image, standFront, walkDown1, walkDown2);
-            case "left" -> image = walkAnimationSetter(image, standLeft, walkLeft1, walkLeft2, walkLeft3, walkLeft4);
-            case "right" -> image = standRight;
+            case "up" -> image = walkAnimationSetter(image, waldUp);
+            case "down" -> image = walkAnimationSetter(image, walkDown);
+            case "left" -> image = walkAnimationSetter(image, walkLeft);
+            case "right" -> image = walkAnimationSetter(image, walkRight);
         }
 
         int playerWidth = gamePanel.getTileSize() * 2;
@@ -158,33 +162,19 @@ public class Player extends Entity{
 
         graphics2D.drawImage(image, (int)x, (int)y, playerWidth, playerHeight, null);
     }
-    private BufferedImage walkAnimationSetter(BufferedImage image, BufferedImage standing, BufferedImage animation1, BufferedImage animation2, BufferedImage animation3, BufferedImage animation4){
+    private BufferedImage walkAnimationSetter(BufferedImage image, List<BufferedImage> list){
 
         if(!keyHandler.isKeyPressed()){
-            image = standing;
+            image = list.getFirst();
             return image;
         }
         switch (moveSprite){
-            case 1 -> image = animation1;
-            case 2 -> image = animation2;
-            case 3 -> image = standing;
-            case 4 -> image = animation3;
-            case 5 -> image = animation4;
-        }
-        return image;
-    }
-    private BufferedImage walkAnimationSetter(BufferedImage image, BufferedImage standing, BufferedImage animation1, BufferedImage animation2){
-
-        if(!keyHandler.isKeyPressed()){
-            image = standing;
-            return image;
-        }
-        switch (moveSprite){
-            case 1  -> image = animation1;
-            case 2 -> image = animation2;
-            case 3  -> image = standing;
-            case 4 -> image = animation1;
-            case 5 -> image = animation2;
+            case 0 -> image = list.get(0);
+            case 1 -> image = list.get(1);
+            case 2 -> image = list.get(2);
+            case 3 -> image = list.get(3);
+            case 4 -> image = list.get(4);
+            case 5 -> image = list.get(5);
         }
         return image;
     }
