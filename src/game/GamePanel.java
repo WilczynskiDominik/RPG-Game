@@ -1,6 +1,7 @@
 package game;
 
 import game.entity.Player;
+import game.tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +22,7 @@ public class GamePanel extends JPanel implements Runnable{
     final private KeyHandler KEY_HANDLER = new KeyHandler();
     private Thread gameThread;
     private Player player = new Player(this, KEY_HANDLER);
+    private TileManager map1 = new TileManager(this, "resource/maps/tempMap1.txt");
 
     public GamePanel(){
 
@@ -76,6 +78,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
     private void update(){
 
+
         player.update();
     }
     protected void paintComponent(Graphics graphics){
@@ -83,6 +86,7 @@ public class GamePanel extends JPanel implements Runnable{
         super.paintComponent(graphics);
         Graphics2D graphics2D = (Graphics2D) graphics;
 
+        map1.draw(graphics2D);
         player.draw(graphics2D);
         //graphics2D.fillRect(playerX, playerY, tileSize, tileSize);
         graphics2D.dispose();   //clear memory after draw character
@@ -90,6 +94,12 @@ public class GamePanel extends JPanel implements Runnable{
 
     public int getTileSize(){
         return TILE_SIZE_AFTER_SCALE;
+    }
+    public int getScreenColumns() {
+        return MAX_SCREEN_COLUMNS;
+    }
+    public int getScreenRows() {
+        return MAX_SCREEN_ROWS;
     }
 }
 

@@ -10,7 +10,6 @@ public class Entity {
     protected float y;
     protected int speed;
 
-    protected BufferedImage standFront, standBack, standLeft, standRight;
     protected List<BufferedImage> walkDown;
     protected List<BufferedImage> waldUp;
     protected List<BufferedImage> walkLeft;

@@ -36,33 +36,33 @@ public class Player extends Entity{
 
         try{
             //down
-            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front1.png"))));
-            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front2.png"))));
-            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front3.png"))));
-            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front4.png"))));
-            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front5.png"))));
-            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Front6.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Front1.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Front2.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Front3.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Front4.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Front5.png"))));
+            walkDown.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Front6.png"))));
             //up
-            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back1.png"))));
-            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back2.png"))));
-            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back3.png"))));
-            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back4.png"))));
-            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back5.png"))));
-            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Back6.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Back1.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Back2.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Back3.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Back4.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Back5.png"))));
+            waldUp.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Back6.png"))));
             //left
-            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left1.png"))));
-            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left2.png"))));
-            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left3.png"))));
-            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left4.png"))));
-            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left5.png"))));
-            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Left6.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Left1.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Left2.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Left3.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Left4.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Left5.png"))));
+            walkLeft.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Left6.png"))));
             //right
-            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right1.png"))));
-            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right2.png"))));
-            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right3.png"))));
-            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right4.png"))));
-            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right5.png"))));
-            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/player/Right6.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Right1.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Right2.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Right3.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Right4.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Right5.png"))));
+            walkRight.add(ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/entity/player/Right6.png"))));
 
         }catch(IOException e){
             //e.printStackTrace();
