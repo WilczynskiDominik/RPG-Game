@@ -34,8 +34,8 @@ public class Player extends Entity{
     }
     private void setDefaultValues(){
 
-        x = gamePanel.getTileSize() * 8;
-        y = gamePanel.getTileSize() * 7;
+        x = gamePanel.getTileSize() * 24;
+        y = gamePanel.getTileSize() * 20;
         speed = 4;
         direction = "down";
     }
@@ -190,5 +190,11 @@ public class Player extends Entity{
     }
     public int getScreenY() {
         return screenY;
+    }
+    public int getPlayerHeight() {
+        return playerHeight;
+    }
+    public int getPlayerWidth() {
+        return playerWidth;
     }
 }

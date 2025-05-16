@@ -13,10 +13,6 @@ public class TileManager{
     final private TileLoader TILE_LOADER;
     final private String MAP_PATH;
     final private String[][] MAP;
-    private int playerColumn;
-    private int playerRow;
-    private int screenStartX;
-    private int screenStartY;
 
     public TileManager(GamePanel gamePanel, TileLoader tileLoader, String mapPath){
 
@@ -41,27 +37,46 @@ public class TileManager{
             //System.out.println(e);
         }
     }
-
     //UPDATE
     public void update(){
 
     }
-
     //DRAW
     public void draw(Graphics2D graphics2D){
 
+        int playerWorldY = (int)GAME_PANEL.getPlayer().getY();
+        int playerWorldX = (int)GAME_PANEL.getPlayer().getX();
+        int playerScreenY = GAME_PANEL.getPlayer().getScreenY();
+        int playerScreenX = GAME_PANEL.getPlayer().getScreenX();
+
         for(int i = 0; i < GAME_PANEL.getWorldRows(); i++){
             for(int j = 0; j < GAME_PANEL.getWorldColumns(); j++){
-                int index = Integer.parseInt(MAP[i][j]);
-                if(index == 0){
-                    continue;
+                int currentTileY = i * GAME_PANEL.getTileSize();
+                int currentTileX = j * GAME_PANEL.getTileSize();
+                int y = currentTileY - playerWorldY + playerScreenY;
+                int x = currentTileX - playerWorldX + playerScreenX;
+                if(isInScreen(currentTileX,currentTileY)){
+                    int index = Integer.parseInt(MAP[i][j]);
+                    if(index == 0){
+                        continue;
+                    }
+                    Tile tile = TILE_LOADER.getTile(index);
+                    BufferedImage tileImage = tile.getImage();
+                    graphics2D.drawImage(tileImage, x, y, GAME_PANEL.getTileSize(), GAME_PANEL.getTileSize(), null);
                 }
-                Tile tile = TILE_LOADER.getTile(index);
-                BufferedImage tileImage = tile.getImage();
-                int y = i * GAME_PANEL.getTileSize() - (int)GAME_PANEL.getPlayer().getY() + GAME_PANEL.getPlayer().getScreenY();
-                int x = j * GAME_PANEL.getTileSize() - (int)GAME_PANEL.getPlayer().getX() + GAME_PANEL.getPlayer().getScreenX();
-                graphics2D.drawImage(tileImage, x, y, GAME_PANEL.getTileSize(), GAME_PANEL.getTileSize(), null);
             }
         }
+    }
+    private boolean isInScreen(int tileX, int tileY){
+
+        int playerWorldY = (int)GAME_PANEL.getPlayer().getY();
+        int playerWorldX = (int)GAME_PANEL.getPlayer().getX();
+        int playerScreenY = GAME_PANEL.getPlayer().getScreenY();
+        int playerScreenX = GAME_PANEL.getPlayer().getScreenX();
+
+        return tileY <= (playerWorldY + playerScreenY + GAME_PANEL.getPlayer().getPlayerHeight()) &&
+               tileY >= (playerWorldY - playerScreenY - GAME_PANEL.getPlayer().getPlayerHeight()) &&
+               tileX <= (playerWorldX + playerScreenX + GAME_PANEL.getPlayer().getPlayerWidth()) &&
+               tileX >= (playerWorldX - playerScreenX - GAME_PANEL.getPlayer().getPlayerWidth());
     }
 }
