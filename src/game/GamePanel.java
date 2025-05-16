@@ -1,6 +1,7 @@
 package game;
 
 import game.entity.Player;
+import game.tiles.TileLoader;
 import game.tiles.TileManager;
 
 import javax.swing.*;
@@ -18,11 +19,18 @@ public class GamePanel extends JPanel implements Runnable{
     final private int SCREEN_WIDTH = TILE_SIZE_AFTER_SCALE * MAX_SCREEN_COLUMNS;
     final private int SCREEN_HEIGHT = TILE_SIZE_AFTER_SCALE * MAX_SCREEN_ROWS;
     final private int FPS = 60;
+    //WORLD SETTINGS
+    final private int MAX_WORLD_COLUMNS = 50;
+    final private int MAX_WORLD_ROWS = 40;
+    final private int WORLD_WIDTH = TILE_SIZE_AFTER_SCALE * MAX_WORLD_COLUMNS;
+    final private int WORLD_HEIGHT = TILE_SIZE_AFTER_SCALE * MAX_WORLD_ROWS;
+
 
     final private KeyHandler KEY_HANDLER = new KeyHandler();
     private Thread gameThread;
     private Player player = new Player(this, KEY_HANDLER);
-    private TileManager map1 = new TileManager(this, "resource/maps/tempMap1.txt");
+    private TileLoader tileLoader = new TileLoader(this);
+    private TileManager map1 = new TileManager(this, tileLoader, "resource/maps/tempMap1.txt");
 
     public GamePanel(){
 
@@ -78,7 +86,7 @@ public class GamePanel extends JPanel implements Runnable{
     }
     private void update(){
 
-
+        map1.update();
         player.update();
     }
     protected void paintComponent(Graphics graphics){
@@ -88,7 +96,6 @@ public class GamePanel extends JPanel implements Runnable{
 
         map1.draw(graphics2D);
         player.draw(graphics2D);
-        //graphics2D.fillRect(playerX, playerY, tileSize, tileSize);
         graphics2D.dispose();   //clear memory after draw character
     }
 
@@ -100,6 +107,27 @@ public class GamePanel extends JPanel implements Runnable{
     }
     public int getScreenRows() {
         return MAX_SCREEN_ROWS;
+    }
+    public int getScreenWidth() {
+        return SCREEN_WIDTH;
+    }
+    public int getScreenHeight() {
+        return SCREEN_HEIGHT;
+    }
+    public int getWorldColumns() {
+        return MAX_WORLD_COLUMNS;
+    }
+    public int getWorldRows() {
+        return MAX_WORLD_ROWS;
+    }
+    public int getWorldWidth() {
+        return WORLD_WIDTH;
+    }
+    public int getWorldHeight() {
+        return WORLD_HEIGHT;
+    }
+    public Player getPlayer(){
+        return player;
     }
 }
 

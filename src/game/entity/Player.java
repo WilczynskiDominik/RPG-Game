@@ -12,22 +12,31 @@ import java.util.Objects;
 
 public class Player extends Entity{
 
-    private GamePanel gamePanel;
-    private KeyHandler keyHandler;
+    final private GamePanel gamePanel;
+    final private KeyHandler keyHandler;
+    final private int playerWidth;
+    final private int playerHeight;
+    final private int screenX;
+    final private int screenY;
 
     public Player(GamePanel gamePanel, KeyHandler keyHandler){
 
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
+        playerWidth = gamePanel.getTileSize() * 2;
+        playerHeight = gamePanel.getTileSize() * 3;
+        screenX = gamePanel.getScreenWidth() / 2 - (playerWidth / 2);
+        screenY = gamePanel.getScreenHeight() / 2 - (playerHeight / 2);
+
         setDefaultValues();
         getPlayerImage();
     }
     private void setDefaultValues(){
 
-        x = 100;
-        y = 100;
-        speed = 3;
+        x = gamePanel.getTileSize() * 8;
+        y = gamePanel.getTileSize() * 7;
+        speed = 4;
         direction = "down";
     }
     private void getPlayerImage(){
@@ -157,10 +166,7 @@ public class Player extends Entity{
             case "right" -> image = walkAnimationSetter(image, walkRight);
         }
 
-        int playerWidth = gamePanel.getTileSize() * 2;
-        int playerHeight = gamePanel.getTileSize() * 3;
-
-        graphics2D.drawImage(image, (int)x, (int)y, playerWidth, playerHeight, null);
+        graphics2D.drawImage(image, screenX, screenY, playerWidth, playerHeight, null);
     }
     private BufferedImage walkAnimationSetter(BufferedImage image, List<BufferedImage> list){
 
@@ -177,5 +183,12 @@ public class Player extends Entity{
             case 5 -> image = list.get(5);
         }
         return image;
+    }
+
+    public int getScreenX() {
+        return screenX;
+    }
+    public int getScreenY() {
+        return screenY;
     }
 }

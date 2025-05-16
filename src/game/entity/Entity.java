@@ -27,4 +27,11 @@ public class Entity {
         walkLeft = new ArrayList<>();
         walkRight = new ArrayList<>();
     }
+
+    public float getX() {
+        return x;
+    }
+    public float getY() {
+        return y;
+    }
 }

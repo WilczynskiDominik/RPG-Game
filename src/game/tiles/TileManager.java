@@ -3,25 +3,28 @@ package game.tiles;
 import game.GamePanel;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
-public class TileManager {
+public class TileManager{
 
     final private GamePanel GAME_PANEL;
+    final private TileLoader TILE_LOADER;
     final private String MAP_PATH;
-    final private String[][] MAP = new String[12][20];;
-    private List<Tile> tiles;
+    final private String[][] MAP;
+    private int playerColumn;
+    private int playerRow;
+    private int screenStartX;
+    private int screenStartY;
 
-    public TileManager(GamePanel gamePanel, String mapPath){
+    public TileManager(GamePanel gamePanel, TileLoader tileLoader, String mapPath){
 
         this.GAME_PANEL = gamePanel;
+        this.TILE_LOADER = tileLoader;
         this.MAP_PATH = mapPath;
+        MAP = new String[GAME_PANEL.getWorldRows()][GAME_PANEL.getWorldColumns()];
         createTileMap();
-        getTiles();
 
     }
     private void createTileMap(){
@@ -38,17 +41,6 @@ public class TileManager {
             //System.out.println(e);
         }
     }
-    private void getTiles(){
-
-        tiles = new ArrayList<Tile>();
-        tiles.add(null);
-        try{
-            tiles.add(new Tile("/tiles/Gras1.png", GAME_PANEL.getTileSize()));
-            tiles.add(new Tile("/tiles/Dirt.png", GAME_PANEL.getTileSize()));
-        }catch (Exception e){
-            //
-        }
-    }
 
     //UPDATE
     public void update(){
@@ -58,15 +50,17 @@ public class TileManager {
     //DRAW
     public void draw(Graphics2D graphics2D){
 
-        for(int i = 0; i < GAME_PANEL.getScreenRows(); i++){
-            for(int j = 0; j < GAME_PANEL.getScreenColumns(); j++){
+        for(int i = 0; i < GAME_PANEL.getWorldRows(); i++){
+            for(int j = 0; j < GAME_PANEL.getWorldColumns(); j++){
                 int index = Integer.parseInt(MAP[i][j]);
                 if(index == 0){
                     continue;
                 }
-                int y = i * GAME_PANEL.getTileSize();
-                int x = j * GAME_PANEL.getTileSize();
-                graphics2D.drawImage(tiles.get(index).getImage(), x, y, tiles.get(index).getTileSize(), tiles.get(index).getTileSize(), null);
+                Tile tile = TILE_LOADER.getTile(index);
+                BufferedImage tileImage = tile.getImage();
+                int y = i * GAME_PANEL.getTileSize() - (int)GAME_PANEL.getPlayer().getY() + GAME_PANEL.getPlayer().getScreenY();
+                int x = j * GAME_PANEL.getTileSize() - (int)GAME_PANEL.getPlayer().getX() + GAME_PANEL.getPlayer().getScreenX();
+                graphics2D.drawImage(tileImage, x, y, GAME_PANEL.getTileSize(), GAME_PANEL.getTileSize(), null);
             }
         }
     }
